@@ -1,9 +1,11 @@
-import 'dotenv/config';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export default {
   "expo": {
-    "name": "crowd_watch",
+    "name": "Crowd Watch",
     "slug": "crowd_watch",
+    "scheme": "crowdwatch",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,7 +13,7 @@ export default {
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -22,11 +24,26 @@ export default {
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.reechychukz.crowdwatch",
-      "googleServicesFile": "./google-services.json"
+      "googleServicesFile": "./google-services.json",
+      "permissions": [],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "*.myapp.io",
+              "pathPrefix": "/records"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "plugins": [
       [
@@ -45,6 +62,12 @@ export default {
           "isAccessMediaLocationEnabled": true
         }
       ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Crowd Watch access your location."
+        }
+      ]
       // [
       //   "expo-notifications",
       //   {
@@ -64,8 +87,9 @@ export default {
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
       mapBoxAccessToken: process.env.MAPBOX_ACCESS_TOKEN,
+      googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
       "eas": {
-        "projectId": "f9713af7-7f31-4727-96b7-49b4dcfc2f42"
+        "projectId": "ae7a9e9c-32bb-43a9-96cc-da9c8c3bb1cc"
       }
     },
   }
